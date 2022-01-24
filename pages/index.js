@@ -5,11 +5,30 @@ function GlobalStyle() {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        list-style: none;
       }
 
       body {
-        font-family: sans-serif;
+        font-family: "Opens Sans", sans-serif;
       }
+
+      /*App fit Height*/
+      hmtl,
+      body,
+      #__next {
+        min-height: 100vh;
+        display: flex;
+        flex: 1;
+      }
+
+      #__next {
+        flex: 1;
+      }
+      #__next > * {
+        flex: 1;
+      }
+
+      /*./App fit Height */
     `}</style>
   );
 }
