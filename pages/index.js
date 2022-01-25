@@ -108,6 +108,10 @@ export default function PaginaInicial() {
           {/* Formulário */}
           <Box
             as="form"
+            onSubmit={function (infosDoEvento) {
+              infosDoEvento.preventDefault();
+              console.log("Alguém submeteu o form");
+            }}
             styleSheet={{
               display: "flex",
               flexDirection: "column",
