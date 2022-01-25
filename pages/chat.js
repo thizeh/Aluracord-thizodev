@@ -1,3 +1,3 @@
-export default function PaginaDoChat() {
+export default function ChatPage() {
   return <div>Página do chat</div>;
 }
