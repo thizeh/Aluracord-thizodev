@@ -129,7 +129,7 @@ export default function PaginaInicial() {
               {appConfig.name}
             </Text>
 
-            <input
+            {/* <input
               type="text"
               value={username}
               onChange={function handler(event) {
@@ -139,8 +139,16 @@ export default function PaginaInicial() {
                 // Trocar valor da variavel com React
                 setUsername(valor);
               }}
-            />
-            {/* <TextField
+            /> */}
+            <TextField
+              value={username}
+              onChange={function handler(event) {
+                console.log("usuario digitou", event.target.value);
+                // Localizar o valor
+                const valor = event.target.value;
+                // Trocar valor da variavel com React
+                setUsername(valor);
+              }}
               fullWidth
               textFieldColors={{
                 neutral: {
@@ -150,7 +158,7 @@ export default function PaginaInicial() {
                   backgroundColor: appConfig.theme.colors.neutrals[800],
                 },
               }}
-            /> */}
+            />
             <Button
               type="submit"
               label="Entrar"
