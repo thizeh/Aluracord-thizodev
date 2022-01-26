@@ -12,12 +12,13 @@ export default function ChatPage() {
 
   // dev
   - [X] campo criado
-  - [] onChange usando setState (if para se o enter limpar a variavel)
+  - [] onChange usando setState (if para o enter limpar a variavel)
   - [] Lista de mensagens
   */
   // ./Sua lógica vai aqui
 
   const [mensagem, setMensagem] = React.useState("");
+  const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
 
   return (
     <Box
@@ -71,8 +72,15 @@ export default function ChatPage() {
           >
             <TextField
               value={mensagem}
-              onChange={() => {
-                setMensagem();
+              onChange={(event) => {
+                const valor = event.target.value;
+                setMensagem(valor);
+              }}
+              onKeyPress={(event) => {
+                if (event.key === "Enter") {
+                  console.log(event);
+                  setMensagem("");
+                }
               }}
               placeholder="Insira sua mensagem aqui..."
               type="textarea"
