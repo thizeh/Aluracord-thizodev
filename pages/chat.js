@@ -12,7 +12,7 @@ export default function ChatPage() {
 
   // dev
   - [X] campo criado
-  - [] onChange usando setState (if para o enter limpar a variavel)
+  - [+/-] onChange usando setState (if para o enter limpar a variavel)
   - [] Lista de mensagens
   */
   // ./Sua lógica vai aqui
@@ -62,7 +62,10 @@ export default function ChatPage() {
           }}
         >
           {/* <MessageList mensagens={[]} /> */}
-
+          {listaDeMensagens.map((mensagemAtual) => {
+            console.log(mensagemAtual);
+            return <li>{mensagemAtual}</li>;
+          })}
           <Box
             as="form"
             styleSheet={{
@@ -78,7 +81,8 @@ export default function ChatPage() {
               }}
               onKeyPress={(event) => {
                 if (event.key === "Enter") {
-                  console.log(event);
+                  event.preventDefault();
+                  setListaDeMensagens([...listaDeMensagens, mensagem]);
                   setMensagem("");
                 }
               }}
