@@ -22,11 +22,11 @@ export default function ChatPage() {
 
   function handleNovaMensagem(novaMensagem) {
     const mensagem = {
-      id: listaDeMensagens.length,
+      id: listaDeMensagens.length + 1,
       de: "vanessametonini",
       texto: novaMensagem,
     };
-    setListaDeMensagens([...listaDeMensagens, novaMensagem]);
+    setListaDeMensagens([...listaDeMensagens, mensagem]);
     setMensagem("");
   }
 
@@ -73,7 +73,11 @@ export default function ChatPage() {
         >
           {/* <MessageList mensagens={[]} /> */}
           {listaDeMensagens.map((mensagemAtual) => {
-            return <li key={mensagemAtual}>{mensagemAtual}</li>;
+            return (
+              <li key={mensagemAtual.id}>
+                {mensagemAtual.de}: {mensagemAtual.texto}
+              </li>
+            );
           })}
           <Box
             as="form"
