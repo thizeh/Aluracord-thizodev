@@ -12,13 +12,18 @@ export default function ChatPage() {
 
   // dev
   - [X] campo criado
-  - [+/-] onChange usando setState (if para o enter limpar a variavel)
+  - [X] onChange usando setState (if para o enter limpar a variavel)
   - [] Lista de mensagens
   */
   // ./Sua lógica vai aqui
 
   const [mensagem, setMensagem] = React.useState("");
   const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
+
+  function handleNovaMensagem(novaMensagem) {
+    setListaDeMensagens([...listaDeMensagens, novaMensagem]);
+    setMensagem("");
+  }
 
   return (
     <Box
@@ -82,8 +87,8 @@ export default function ChatPage() {
               onKeyPress={(event) => {
                 if (event.key === "Enter") {
                   event.preventDefault();
-                  setListaDeMensagens([...listaDeMensagens, mensagem]);
-                  setMensagem("");
+
+                  handleNovaMensagem();
                 }
               }}
               placeholder="Insira sua mensagem aqui..."
