@@ -4,8 +4,21 @@ import appConfig from "../config.json";
 
 export default function ChatPage() {
   // Sua lógica vai aqui
+  /*
+  //usuario
+  - Digitar no textarea
+  - botao enter para enviar
+  - aparecer no chat(texto na listagem)
 
+  // dev
+  - [X] campo criado
+  - [] onChange usando setState (if para se o enter limpar a variavel)
+  - [] Lista de mensagens
+  */
   // ./Sua lógica vai aqui
+
+  const [mensagem, setMensagem] = React.useState("");
+
   return (
     <Box
       styleSheet={{
@@ -57,6 +70,10 @@ export default function ChatPage() {
             }}
           >
             <TextField
+              value={mensagem}
+              onChange={() => {
+                setMensagem();
+              }}
               placeholder="Insira sua mensagem aqui..."
               type="textarea"
               styleSheet={{
