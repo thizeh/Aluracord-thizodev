@@ -21,6 +21,11 @@ export default function ChatPage() {
   const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
 
   function handleNovaMensagem(novaMensagem) {
+    const mensagem = {
+      id: listaDeMensagens.length,
+      de: "vanessametonini",
+      texto: novaMensagem,
+    };
     setListaDeMensagens([...listaDeMensagens, novaMensagem]);
     setMensagem("");
   }
@@ -68,8 +73,7 @@ export default function ChatPage() {
         >
           {/* <MessageList mensagens={[]} /> */}
           {listaDeMensagens.map((mensagemAtual) => {
-            console.log(mensagemAtual);
-            return <li>{mensagemAtual}</li>;
+            return <li key={mensagemAtual}>{mensagemAtual}</li>;
           })}
           <Box
             as="form"
@@ -87,8 +91,7 @@ export default function ChatPage() {
               onKeyPress={(event) => {
                 if (event.key === "Enter") {
                   event.preventDefault();
-
-                  handleNovaMensagem();
+                  handleNovaMensagem(mensagem);
                 }
               }}
               placeholder="Insira sua mensagem aqui..."
