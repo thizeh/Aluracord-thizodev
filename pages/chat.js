@@ -2,6 +2,10 @@ import { Box, Text, TextField, Image, Button } from "@skynexui/components";
 import React from "react";
 import appConfig from "../config.json";
 
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMxMjM0NiwiZXhwIjoxOTU4ODg4MzQ2fQ.tZ5doexj1vLSrB1_JyG-EavK0W0y1as1oTri_rwft3I";
+const SUPABASE_URL = "https://ntwewzstjbgttesggyfj.supabase.co";
+
 export default function ChatPage() {
   // Sua lógica vai aqui
   /*

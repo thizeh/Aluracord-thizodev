@@ -7,28 +7,24 @@ function GlobalStyle() {
         box-sizing: border-box;
         list-style: none;
       }
-
       body {
-        font-family: "Opens Sans", sans-serif;
+        font-family: "Open Sans", sans-serif;
       }
-
-      /*App fit Height*/
-      hmtl,
+      /* App fit Height */
+      html,
       body,
       #__next {
         min-height: 100vh;
         display: flex;
         flex: 1;
       }
-
       #__next {
         flex: 1;
       }
       #__next > * {
         flex: 1;
       }
-
-      /*./App fit Height */
+      /* ./App fit Height */
     `}</style>
   );
 }
