@@ -38,6 +38,18 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 - [] Lista de mensagens
 */
 // ./Sua lógica vai aqui
+
+// fazer o chat atualizar quando 2 pessoas conversam
+
+function escutaMensagensEmTempoReal() {
+  return supabaseClient
+    .from("mensagens")
+    .on("INSERT", () => {
+      console.log("Houve uma nova mensagem");
+    })
+    .subscribe();
+}
+
 export default function ChatPage() {
   const roteamento = useRouter();
   const usuarioLogado = roteamento.query.username;
@@ -69,6 +81,7 @@ export default function ChatPage() {
         console.log("Dados da consulta:", data);
         setListaDeMensagens(data);
       });
+    escutaMensagensEmTempoReal();
   }, []);
 
   function handleNovaMensagem(novaMensagem) {
