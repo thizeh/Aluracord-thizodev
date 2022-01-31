@@ -45,8 +45,9 @@ export default function ChatPage() {
     supabaseClient
       .from("mensagens")
       .select("*")
-      .then((dados) => {
-        console.log("Dados da consulta:", dados);
+      .then(({ data }) => {
+        console.log("Dados da consulta:", data);
+        setListaDeMensagens(data);
       });
   }, []);
 
@@ -216,7 +217,7 @@ function MessageList(props) {
                   display: "inline-block",
                   marginRight: "8px",
                 }}
-                src={`https://github.com/vanessametonini.png`}
+                src={`https://github.com/${mensagem.de}.png`}
               />
               <Text tag="strong">{mensagem.de}</Text>
               <Text
