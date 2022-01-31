@@ -44,7 +44,16 @@ export default function ChatPage() {
   console.log("roteamento.query", roteamento.query);
   console.log("usuarioLogado", usuarioLogado);
   const [mensagem, setMensagem] = React.useState("");
-  const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
+  const [listaDeMensagens, setListaDeMensagens] = React.useState([
+    {
+      id: 1,
+      de: "omariosouto",
+      texto:
+        ":sticker: https://2.bp.blogspot.com/-nH9dxjLwVKs/U9MYpgNHI1I/AAAAAAAAHcQ/1SfREKkwNJY/s1600/Chamander+evolu%C3%A7%C3%A3o+Nintendo+Blast.gif",
+    },
+  ]);
+
+  /* Para os stickers, vamos usar o formato -> ':sticker: URL_da_imagem' */
 
   React.useEffect(() => {
     supabaseClient
@@ -53,7 +62,7 @@ export default function ChatPage() {
       .order("id", { ascending: false })
       .then(({ data }) => {
         console.log("Dados da consulta:", data);
-        setListaDeMensagens(data);
+        // setListaDeMensagens(data);
       });
   }, []);
 
