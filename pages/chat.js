@@ -1,6 +1,7 @@
 import { Box, Text, TextField, Image, Button } from "@skynexui/components";
 import React from "react";
 import appConfig from "../config.json";
+import { useRouter } from "next/router";
 import { createClient } from "@supabase/supabase-js";
 
 const SUPABASE_ANON_KEY =
@@ -23,21 +24,24 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 //     console.log(response);
 //   });
 
+// Sua lógica vai aqui
+/*
+//usuario
+- Digitar no textarea
+- botao enter para enviar
+- aparecer no chat(texto na listagem)
+
+// dev
+- [X] campo criado
+- [X] onChange usando setState (if para o enter limpar a variavel)
+- [] Lista de mensagens
+*/
+// ./Sua lógica vai aqui
 export default function ChatPage() {
-  // Sua lógica vai aqui
-  /*
-  //usuario
-  - Digitar no textarea
-  - botao enter para enviar
-  - aparecer no chat(texto na listagem)
-
-  // dev
-  - [X] campo criado
-  - [X] onChange usando setState (if para o enter limpar a variavel)
-  - [] Lista de mensagens
-  */
-  // ./Sua lógica vai aqui
-
+  const roteamento = useRouter();
+  const usuarioLogado = roteamento.query.username;
+  console.log("roteamento.query", roteamento.query);
+  console.log("usuarioLogado", usuarioLogado);
   const [mensagem, setMensagem] = React.useState("");
   const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
 
@@ -55,7 +59,7 @@ export default function ChatPage() {
   function handleNovaMensagem(novaMensagem) {
     const mensagem = {
       //id: listaDeMensagens.length + 1,
-      de: "vanessametonini",
+      de: usuarioLogado,
       texto: novaMensagem,
     };
 
