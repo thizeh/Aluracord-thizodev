@@ -45,17 +45,17 @@ export default function ChatPage() {
   console.log("usuarioLogado", usuarioLogado);
   const [mensagem, setMensagem] = React.useState("");
   const [listaDeMensagens, setListaDeMensagens] = React.useState([
-    {
-      id: 1,
-      de: "omariosouto",
-      texto:
-        ":sticker: https://2.bp.blogspot.com/-nH9dxjLwVKs/U9MYpgNHI1I/AAAAAAAAHcQ/1SfREKkwNJY/s1600/Chamander+evolu%C3%A7%C3%A3o+Nintendo+Blast.gif",
-    },
-    {
-      id: 2,
-      de: "peas",
-      texto: "O ternário é zica",
-    },
+    // {
+    //   id: 1,
+    //   de: "omariosouto",
+    //   texto:
+    //     ":sticker: https://2.bp.blogspot.com/-nH9dxjLwVKs/U9MYpgNHI1I/AAAAAAAAHcQ/1SfREKkwNJY/s1600/Chamander+evolu%C3%A7%C3%A3o+Nintendo+Blast.gif",
+    // },
+    // {
+    //   id: 2,
+    //   de: "peas",
+    //   texto: "O ternário é zica",
+    // },
   ]);
 
   /* Para os stickers, vamos usar o formato -> ':sticker: URL_da_imagem' */
@@ -67,7 +67,7 @@ export default function ChatPage() {
       .order("id", { ascending: false })
       .then(({ data }) => {
         console.log("Dados da consulta:", data);
-        // setListaDeMensagens(data);
+        setListaDeMensagens(data);
       });
   }, []);
 
@@ -175,7 +175,16 @@ export default function ChatPage() {
                 color: appConfig.theme.colors.neutrals[200],
               }}
             />
-            <ButtonSendSticker />
+            {/* CallBack */}
+            <ButtonSendSticker
+              onStickerClick={(sticker) => {
+                console.log(
+                  "[USANDO O COMPONENTE] Salva esse sticker no banco",
+                  sticker
+                );
+                handleNovaMensagem(":sticker:" + sticker);
+              }}
+            />
           </Box>
         </Box>
       </Box>
