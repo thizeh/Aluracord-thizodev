@@ -51,6 +51,11 @@ export default function ChatPage() {
       texto:
         ":sticker: https://2.bp.blogspot.com/-nH9dxjLwVKs/U9MYpgNHI1I/AAAAAAAAHcQ/1SfREKkwNJY/s1600/Chamander+evolu%C3%A7%C3%A3o+Nintendo+Blast.gif",
     },
+    {
+      id: 2,
+      de: "peas",
+      texto: "O ternário é zica",
+    },
   ]);
 
   /* Para os stickers, vamos usar o formato -> ':sticker: URL_da_imagem' */
@@ -257,7 +262,18 @@ function MessageList(props) {
                 {new Date().toLocaleDateString()}
               </Text>
             </Box>
-            {mensagem.texto}
+            {/*Condicional: if mensagem de texto possui sticker: 
+              mostra a imagem
+            else
+              mensagem.texto */}
+            {/* Declarativo */}
+            {/* Condicional: {mensagem.texto.startsWith(":sticker:").toString()} */}
+            {mensagem.texto.startsWith(":sticker:") ? (
+              <Image src={mensagem.texto.replace(":sticker:", "")} />
+            ) : (
+              mensagem.texto
+            )}
+            {/* {mensagem.texto} */}
           </Text>
         );
       })}
