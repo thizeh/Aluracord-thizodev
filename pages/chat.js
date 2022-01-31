@@ -53,12 +53,22 @@ export default function ChatPage() {
 
   function handleNovaMensagem(novaMensagem) {
     const mensagem = {
-      id: listaDeMensagens.length + 1,
+      //id: listaDeMensagens.length + 1,
       de: "vanessametonini",
       texto: novaMensagem,
     };
+
+    supabaseClient
+      .from("mensagens")
+      .insert([
+        // Tem que ser um objeto com os MESMOS CAMPOS que você escreveu no supabase
+        mensagem,
+      ])
+      .then(({ data }) => {
+        console.log("Criando mensagem: ", data);
+        setListaDeMensagens([data[0], ...listaDeMensagens]);
+      });
     // Chamada de um backend
-    setListaDeMensagens([mensagem, ...listaDeMensagens]);
     setMensagem("");
   }
 
