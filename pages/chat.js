@@ -41,11 +41,11 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // fazer o chat atualizar quando 2 pessoas conversam
 
-function escutaMensagensEmTempoReal() {
+function escutaMensagensEmTempoReal(adicionaMensagem) {
   return supabaseClient
     .from("mensagens")
-    .on("INSERT", () => {
-      console.log("Houve uma nova mensagem");
+    .on("INSERT", (respostaLive) => {
+      adicionaMensagem(respostaLive.new);
     })
     .subscribe();
 }
@@ -53,22 +53,8 @@ function escutaMensagensEmTempoReal() {
 export default function ChatPage() {
   const roteamento = useRouter();
   const usuarioLogado = roteamento.query.username;
-  console.log("roteamento.query", roteamento.query);
-  console.log("usuarioLogado", usuarioLogado);
   const [mensagem, setMensagem] = React.useState("");
-  const [listaDeMensagens, setListaDeMensagens] = React.useState([
-    // {
-    //   id: 1,
-    //   de: "omariosouto",
-    //   texto:
-    //     ":sticker: https://2.bp.blogspot.com/-nH9dxjLwVKs/U9MYpgNHI1I/AAAAAAAAHcQ/1SfREKkwNJY/s1600/Chamander+evolu%C3%A7%C3%A3o+Nintendo+Blast.gif",
-    // },
-    // {
-    //   id: 2,
-    //   de: "peas",
-    //   texto: "O ternário é zica",
-    // },
-  ]);
+  const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
 
   /* Para os stickers, vamos usar o formato -> ':sticker: URL_da_imagem' */
 
@@ -78,10 +64,22 @@ export default function ChatPage() {
       .select("*")
       .order("id", { ascending: false })
       .then(({ data }) => {
-        console.log("Dados da consulta:", data);
+        // console.log("Dados da consulta:", data);
         setListaDeMensagens(data);
       });
-    escutaMensagensEmTempoReal();
+
+    const subscription = escutaMensagensEmTempoReal((novaMensagem) => {
+      console.log("Nova mensagem:", novaMensagem);
+      console.log("listaDeMensagens:", listaDeMensagens);
+      setListaDeMensagens((valorAtualDaLista) => {
+        console.log("valorAtualDaLista:", valorAtualDaLista);
+        return [novaMensagem, ...valorAtualDaLista];
+      });
+      // handleNovaMensagem(novaMensagem);
+    });
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   function handleNovaMensagem(novaMensagem) {
@@ -99,9 +97,8 @@ export default function ChatPage() {
       ])
       .then(({ data }) => {
         console.log("Criando mensagem: ", data);
-        setListaDeMensagens([data[0], ...listaDeMensagens]);
       });
-    // Chamada de um backend
+
     setMensagem("");
   }
 
@@ -191,10 +188,10 @@ export default function ChatPage() {
             {/* CallBack */}
             <ButtonSendSticker
               onStickerClick={(sticker) => {
-                console.log(
-                  "[USANDO O COMPONENTE] Salva esse sticker no banco",
-                  sticker
-                );
+                // console.log(
+                //   "[USANDO O COMPONENTE] Salva esse sticker no banco",
+                //   sticker
+                // );
                 handleNovaMensagem(":sticker:" + sticker);
               }}
             />
@@ -230,7 +227,7 @@ function Header() {
 }
 
 function MessageList(props) {
-  console.log(props);
+  // console.log(props);
   return (
     <Box
       tag="ul"
