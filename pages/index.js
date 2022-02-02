@@ -21,17 +21,6 @@ function Titulo(props) {
   );
 }
 
-// function HomePage() {
-//   return (
-//     <div>
-//       <GlobalStyle />
-//       <Titulo tag="h1">Boas Vindas</Titulo>
-//       <h2>Discord - Alura Matrix</h2>
-//     </div>
-//   );
-// }
-// export default HomePage;
-
 export default function PaginaInicial() {
   // const username = "thizeh";
   const [username, setUsername] = React.useState("thizeh");
@@ -71,14 +60,12 @@ export default function PaginaInicial() {
           }}
         >
           {/* Formulário */}
+
           <Box
             as="form"
             onSubmit={function (infosDoEvento) {
               infosDoEvento.preventDefault();
-              console.log("Alguém submeteu o form");
-              // roteamento.push('/chat?username=' + username);
               roteamento.push(`/chat?username=${username}`);
-              // window.location.href = "/chat";
             }}
             styleSheet={{
               display: "flex",
@@ -90,7 +77,7 @@ export default function PaginaInicial() {
               marginBottom: "32px",
             }}
           >
-            <Titulo tag="h2">Boas vindas de volta!</Titulo>
+            <Titulo tag="h2">Boas vindas!</Titulo>
             <Text
               variant="body3"
               styleSheet={{
@@ -101,24 +88,11 @@ export default function PaginaInicial() {
               {appConfig.name}
             </Text>
 
-            {/* <input
-              type="text"
-              value={username}
-              onChange={function handler(event) {
-                console.log("usuario digitou", event.target.value);
-                // Localizar o valor
-                const valor = event.target.value;
-                // Trocar valor da variavel com React
-                setUsername(valor);
-              }}
-            /> */}
             <TextField
               value={username}
               onChange={function handler(event) {
-                console.log("usuario digitou", event.target.value);
-                // Localizar o valor
                 const valor = event.target.value;
-                // Trocar valor da variavel com React
+
                 setUsername(valor);
               }}
               fullWidth
